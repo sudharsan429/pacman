@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .div01{
+            width: 400px;
+            border-top: 10px dotted #000;
+            position: absolute;
+            top: 225px;
+        }
+        .div02{
+            width: 20px;
+            height: 10px;
+            background-color: #ffffff;
+            border-radius: 0 10px 10px 0;
+            animation: anime 5s linear ;
+            animation-iteration-count: 2;
+            position: absolute;
+            top: 225px;
+        }
+        @keyframes anime {
+            form{
+                width: 0;
+            }
+            to{
+                width: 400px;
+            }
+        }
+        .div03{
+            width: 400px;
+            height: 10px;
+            /* background-color: #ca9898; */
+            animation: animes 10s linear ;
+            animation-direction: reverse;
+            position: absolute;
+            top: 225px;
+            /* left: 400px; */
+        }
+        @keyframes animes {
+            form{
+                width: 0px;
+            }
+            to{
+                width: 400px;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <button onclick="start()">Start</button>
+    <!-- <div class="div01"></div> -->
+    <!-- <div class="div02"></div> -->
+    <!-- <div class="div03"></div> -->
+
+    <script>
+        var pacMen = ['PacMan1.png','PacMan2.png'];
+        var pacMenBack=['PacMan3.png','PacMan4.png'];
+        var pac1 = document.createElement('img');
+        var pac2 = document.createElement('img');
+
+        
+
+        function start() {
+                pac1.src = pacMen[0];
+                pac1.style.width= "50px";
+                pac1.style.height= "50px";
+                pac1.style.position= "absolute";
+                pac1.style.top= "200px";                 
+                document.body.appendChild(pac1);
+
+                pac2.src = pacMenBack[0];
+                pac2.style.width= "50px";
+                pac2.style.height= "50px";
+                pac2.style.position= "absolute";
+                pac2.style.top= "200px"; 
+                pac2.style.left= "400px"; 
+
+                document.body.appendChild(pac2);
+
+            
+        
+        }
+
+        
+
+        // stop condition
+                let position =0;
+                let velocity = 40;
+                let forward = true;
+                let front = 1;
+                let back = 1;
+                function veloty(){
+                    if(position<700 && forward==true){
+                        position += velocity;
+                        pac1.src = pacMen[front%2];
+                        pac1.style.left = position + "px";
+                        pac2.style.display= "none";
+                        pac1.style.display= "block";
+                        console.log("forward :"+position);
+                        front = front + 1;
+                        if(position>=700){
+                            forward = false;
+                            console.log("boolean :"+position);
+
+                        }
+                    }
+                    // reverse condition
+                    if(position>0 && forward==false){
+                        pac2.src = pacMenBack[back%2];
+                        position = position-velocity;
+                        pac2.style.left = position + "px";
+                        pac1.style.display= "none";
+                        pac2.style.display= "block";
+                        console.log("backward :"+position);
+                        back = back + 1;
+                        if(position<=0 ){
+                            forward = true;
+                        }
+                    }
+                    
+                }setInterval(veloty,500);
+                
+                </script>
+</body>
+</html>
+
